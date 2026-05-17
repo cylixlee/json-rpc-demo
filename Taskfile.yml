@@ -22,6 +22,22 @@ tasks:
     cmds:
       - mkdir -p build
       - task: build-py
+      - task: build-go
+    silent: true
+
+  run:
+    desc: Run executables
+    cmds:
+      - task: build
+        if: "[ ! -d build ]"
+      - cd build && ./client
+    interactive: true
+    silent: true
+
+  build-go:
+    internal: true
+    cmds:
+      - cd client-go && go build -o ../build/client.exe main.go
     silent: true
 
   build-py:

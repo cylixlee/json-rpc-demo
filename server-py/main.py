@@ -13,7 +13,7 @@ def pythonic_hello(name: str) -> str:
 
 
 async def main() -> None:
-    print("[SERVER PY] Starting JSON-RPC server...")
+    print("[SERVER PY] Starting JSON-RPC server...", file=sys.stderr)
     loop = asyncio.get_event_loop()
     manager = AsyncJSONRPCResponseManager(dispatcher)
     while True:
@@ -34,7 +34,7 @@ async def main() -> None:
             sys.stdout.flush()
         except KeyboardInterrupt, asyncio.CancelledError:
             break
-    print("[SERVER PY] Bye~")
+    print("[SERVER PY] Bye~", file=sys.stderr)
 
 
 if __name__ == "__main__":
