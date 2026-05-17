@@ -6,6 +6,9 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = ["ajsonrpc>=1.2.0"]
 
+[dependency-groups]
+dev = ["nuitka>=4.1"]
+
 [tool.basedpyright]
 reportUnusedCallResult = false
 reportMissingTypeStubs = false

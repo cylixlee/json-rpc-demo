@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+vars:
+  NUITKA_COMPILE_OPTIONS:
+    - follow-imports
+    - mode=app-dist
+    - output-dir=../build
+    - output-folder-name=server
+    - remove-output
+
+tasks:
+  clean:
+    desc: Remove build artifacts
+    cmds:
+      - rm -rf build
+    silent: true
+
+  build:
+    desc: Build final executables
+    cmds:
+      - mkdir -p build
+      - task: build-py
+    silent: true
+
+  build-py:
+    internal: true
+    cmds:
+      - uv --directory server-py run -m nuitka --{{.NUITKA_COMPILE_OPTIONS | join " --"}} main.py
+      - mv build/server.dist/* build/
+      - rm build/server.dist
+    silent: true
